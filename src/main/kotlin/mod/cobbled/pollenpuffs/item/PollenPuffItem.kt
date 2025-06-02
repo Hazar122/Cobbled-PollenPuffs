@@ -35,7 +35,8 @@ class PollenPuffItem(settings: Settings, polymerItem: Item) : SimplePolymerItem(
         tooltip: MutableList<Text>,
         type: TooltipType
     ) {
-        tooltip.add(Text.literal("").formatted(Formatting.GRAY))
+        tooltip.add(Text.literal("Restores Health").formatted(Formatting.GRAY))
+        tooltip.add(Text.literal("Chance to Apply Perfect Nutrition").formatted(Formatting.GRAY))
     }
 
     override fun getEatSound(): SoundEvent {

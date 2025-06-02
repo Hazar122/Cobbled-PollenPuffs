@@ -62,7 +62,11 @@ class ArtificialPollenPuffItem(settings: Settings, polymerItem: Item) : SimplePo
         tooltip: MutableList<Text>,
         type: TooltipType
     ) {
-        tooltip.add(Text.literal("").formatted(Formatting.GRAY))
+        tooltip.add(Text.literal("Restores Health").formatted(Formatting.GRAY))
+        tooltip.add(Text.literal("Chance to Apply Perfect Nutrition").formatted(Formatting.GRAY))
+        tooltip.add(Text.literal("Gives Regen for 20 seconds").formatted(Formatting.GRAY))
+        tooltip.add(Text.literal("Reduces Negative Effects").formatted(Formatting.GRAY))
+
     }
 
     override fun getEatSound(): SoundEvent {

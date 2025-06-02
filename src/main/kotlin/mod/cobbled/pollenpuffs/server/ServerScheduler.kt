@@ -1,6 +1,5 @@
 package mod.cobbled.pollenpuffs.server
 
-import mod.cobbled.pollenpuffs.Cobbledpollenpuffs.LOGGER
 import net.fabricmc.fabric.api.event.lifecycle.v1.ServerTickEvents
 import net.minecraft.server.MinecraftServer
 

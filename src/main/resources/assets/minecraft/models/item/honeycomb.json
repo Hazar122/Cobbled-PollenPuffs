@@ -1,0 +1,18 @@
+{
+  "parent":"minecraft:item/generated",
+  "textures":{"layer0":"minecraft:item/honeycomb"},
+  "overrides":[
+    {
+      "model":"cobbled-pollenpuffs:item/pollen_puff",
+      "predicate":{"custom_model_data":2}
+    },
+    {
+      "model":"cobbled-pollenpuffs:item/golden_pollen_puff",
+      "predicate":{"custom_model_data":3}
+    },
+    {
+      "model":"cobbled-pollenpuffs:item/artificial_golden_pollen_puff",
+      "predicate":{"custom_model_data":4}
+    }
+  ]
+}

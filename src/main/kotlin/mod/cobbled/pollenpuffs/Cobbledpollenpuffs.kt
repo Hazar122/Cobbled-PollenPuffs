@@ -2,41 +2,20 @@ package mod.cobbled.pollenpuffs
 
 import com.cobblemon.mod.common.api.events.CobblemonEvents
 import com.cobblemon.mod.common.api.events.entity.PokemonEntityLoadEvent
-import com.cobblemon.mod.common.util.player
-import com.cobblemon.mod.common.util.server
-import eu.pb4.polymer.core.api.item.PolymerRecipe
+import com.cobblemon.mod.common.entity.pokemon.PokemonEntity
 import eu.pb4.polymer.resourcepack.api.PolymerResourcePackUtils
 import mod.cobbled.pollenpuffs.effect.ModEffects
 import mod.cobbled.pollenpuffs.item.ModItems
 import mod.cobbled.pollenpuffs.server.ServerScheduler
 import net.fabricmc.api.ModInitializer
-import net.fabricmc.fabric.api.command.v2.CommandRegistrationCallback
 import net.fabricmc.fabric.api.event.player.UseItemCallback
 import net.minecraft.component.DataComponentTypes
 import net.minecraft.component.type.FoodComponent
 import net.minecraft.component.type.NbtComponent
-import net.minecraft.entity.effect.StatusEffectInstance
 import net.minecraft.item.ItemStack
-import net.minecraft.item.Items
 import net.minecraft.nbt.NbtCompound
-import net.minecraft.recipe.CraftingRecipe
-import net.minecraft.recipe.Ingredient
-import net.minecraft.recipe.RawShapedRecipe
-import net.minecraft.recipe.Recipe
-import net.minecraft.recipe.RecipeEntry
-import net.minecraft.recipe.RecipeSerializer
-import net.minecraft.recipe.ShapedRecipe
-import net.minecraft.recipe.ShapelessRecipe
-import net.minecraft.recipe.book.CraftingRecipeCategory
-import net.minecraft.registry.Registries
-import net.minecraft.server.command.CommandManager
-import net.minecraft.server.network.ServerPlayerEntity
-import net.minecraft.text.Text
-import net.minecraft.util.Identifier
 import net.minecraft.util.TypedActionResult
-import net.minecraft.util.collection.DefaultedList
 import org.slf4j.LoggerFactory
-import java.rmi.registry.Registry
 import kotlin.random.Random
 
 object Cobbledpollenpuffs : ModInitializer {
@@ -49,7 +28,6 @@ object Cobbledpollenpuffs : ModInitializer {
 		PolymerResourcePackUtils.markAsRequired()
 		PolymerResourcePackUtils.addModAssets(MOD_ID)
 
-		//ModItems.registerAll()
 		ModItems.getModel()
 		ModItems.registerItemGroups()
 
@@ -107,33 +85,41 @@ object Cobbledpollenpuffs : ModInitializer {
 		}
 
 		CobblemonEvents.POKEMON_ENTITY_LOAD.subscribe { event: PokemonEntityLoadEvent ->
-			val pokemon = event.pokemonEntity
-			LOGGER.info("Pokemon entity loaded: ${pokemon.pokemon.species.name}")
-			if (pokemon.pokemon.species.name == "Cutiefly" || pokemon.pokemon.species.name == "Ribombee") {
-				pokemon.schedulingTracker.addTask(
-				pokemon.taskBuilder()
-					.interval((20 * (1 + Random.nextInt(3))).toFloat())
+			dropPuff(event.pokemonEntity)
+		}
+		CobblemonEvents.POKEMON_ENTITY_SPAWN.subscribe { event ->
+			dropPuff(event.entity)
+		}
+		CobblemonEvents.POKEMON_SENT_POST.subscribe{ event ->
+			dropPuff(event.pokemonEntity)
+		}
+	}
+
+
+
+	fun dropPuff(pe: PokemonEntity){
+		if (pe.pokemon.species.name == "Cutiefly" || pe.pokemon.species.name == "Ribombee") {
+			pe.schedulingTracker.addTask(
+				pe.taskBuilder()
+					.interval((60 * (5 + Random.nextInt(6))).toFloat())
 					.infiniteIterations()
 					.execute { task ->
-						if (!pokemon.world.isClient) {
+						if (!pe.world.isClient) {
 							if (Random.nextFloat() < 0.5f) {
-								if ((pokemon.pokemon.species.name == "Ribombee") && pokemon.pokemon.shiny) {
+								if ((pe.pokemon.species.name == "Ribombee") && pe.pokemon.shiny) {
 									if (Random.nextFloat() < 0.1f) {
-										pokemon.dropStack(ItemStack(ModItems.GOLDENPOLLENPUFF))
+										pe.dropStack(ItemStack(ModItems.GOLDENPOLLENPUFF))
 									} else {
-										pokemon.dropStack(ItemStack(ModItems.POLLENPUFF))
+										pe.dropStack(ItemStack(ModItems.POLLENPUFF))
 									}
 								} else {
-									pokemon.dropStack(ItemStack(ModItems.POLLENPUFF))
+									pe.dropStack(ItemStack(ModItems.POLLENPUFF))
 								}
 
 							}
 						}
 					}
 					.build())
-				LOGGER.info("Pollen puff drop task set up for ${pokemon.pokemon.species.name}")
-			}
 		}
-
 	}
 }

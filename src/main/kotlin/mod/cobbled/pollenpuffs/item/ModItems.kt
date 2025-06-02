@@ -6,7 +6,6 @@ import mod.cobbled.pollenpuffs.Cobbledpollenpuffs.MOD_ID
 import mod.cobbled.pollenpuffs.effect.ModEffects
 import net.fabricmc.fabric.api.itemgroup.v1.FabricItemGroup
 import net.minecraft.component.type.FoodComponent
-import net.minecraft.entity.effect.StatusEffect
 import net.minecraft.entity.effect.StatusEffectInstance
 import net.minecraft.entity.effect.StatusEffects
 import net.minecraft.item.Item
@@ -42,7 +41,7 @@ object ModItems {
         )
     )
     var GOLDENPOLLENPUFF =  Registry.register(Registries.ITEM, Identifier.of(MOD_ID, "golden_pollen_puff"),
-        PollenPuffItem(
+        GoldenPollenPuffItem(
             Item.Settings()
                 .food(
                     FoodComponent
@@ -64,7 +63,7 @@ object ModItems {
         )
     )
     var ARTIFICIALGOLDENPOLLENPUFF =  Registry.register(Registries.ITEM, Identifier.of(MOD_ID, "artificial_golden_pollen_puff"),
-        PollenPuffItem(
+        ArtificialPollenPuffItem(
             Item.Settings()
                 .food(
                     FoodComponent

@@ -1,11 +1,20 @@
 {
-  "type": "minecraft:crafting_shapeless",
-  "ingredients": [
-    { "item": "cobbled-pollenpuffs:pollen_puff" },
-    { "item": "minecraft:honeycomb" },
-    { "item": "minecraft:gold_ingot" },
-    { "item": "minecraft:gold_ingot" },
-    { "item": "minecraft:gold_ingot" }
+  "type": "minecraft:crafting_shaped",
+  "key": {
+    "#": {
+      "item": "cobbled-pollenpuffs:pollen_puff"
+    },
+    "X": {
+      "item": "minecraft:gold_nugget"
+    },
+    "Y": {
+      "item": "minecraft:honeycomb"
+    }
+  },
+  "pattern": [
+    "XYX",
+    "Y#Y",
+    "XYX"
   ],
   "result": {
     "id": "cobbled-pollenpuffs:artificial_golden_pollen_puff"
