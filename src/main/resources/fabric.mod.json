@@ -7,7 +7,7 @@
 	"authors": [
 		"Hazar122"
 	],
-	"license": "CC0-1.0",
+	"license": "CC BY-NC-SA 4.0",
 	"icon": "assets/cobbled-pollenpuffs/icon.png",
 	"environment": "*",
 	"entrypoints": {
