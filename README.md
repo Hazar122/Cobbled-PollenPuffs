@@ -20,7 +20,7 @@ license - https://creativecommons.org/licenses/by-nc-sa/4.0/deed.en
   Pokémon like **Cutiefly** and **Ribombee** occasionally drop puffs over time.
 
 - 🎨 **Custom Models & Textures**  
-  Utilizes [Polymer](github.com/Patbox/polymer) to render fully custom items without replacing vanilla assets.
+  Utilizes Polymer to render fully custom items without replacing vanilla assets.
 
 ---
 
